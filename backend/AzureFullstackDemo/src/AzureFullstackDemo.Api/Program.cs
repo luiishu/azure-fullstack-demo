@@ -57,6 +57,7 @@ app.UseCors(allowedFrontendsPolicy);
 
 var api = app.MapGroup("api/v1");
 api.MapGet("/", () => "Hello from AzureFullstackDemo.Api!");
+api.MapGet("/health", () => "AzureFullstackDemo.Api is up and running! 🚀");
 
 var kpis = api.MapGroup("/kpis");
 kpis.MapGetKpis();
@@ -64,4 +65,3 @@ kpis.MapGetKpis();
 Console.WriteLine($"Running AzureFullstackDemo.Api in: {app.Environment.EnvironmentName}");
 
 app.Run();
-
