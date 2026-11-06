@@ -1,0 +1,12 @@
+<section class="page-container">
+    <h1>DEV Page</h1>
+    <hr>
+    <br>
+    <button mat-raised-button (click)="getGreeting()">Call API</button>
+    @if (greeting(); as response) {
+    <pre>API: "{{ response }}"</pre>
+    <p>🕐 API response last received: {{ greetingLastReceived() | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+    } @else {
+        <p>No response received from API.</p>
+    }
+</section>

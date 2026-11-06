@@ -1,0 +1,238 @@
+:host {
+    display: block;
+}
+
+.dashboard {
+    padding: 20px 16px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* Heading */
+
+.dashboard-heading {
+    margin-bottom: 24px;
+
+    h1 {
+        margin: 0 0 6px;
+        font-size: 24px;
+        font-weight: 600;
+        color: #26352a;
+    }
+
+    p {
+        margin: 0;
+        font-size: 14px;
+        color: #4f514a;
+    }
+}
+
+/* KPI grid */
+
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+/* KPI cards */
+
+.kpi-card {
+    border-radius: 14px;
+    // background-color: #ffffff;
+    background-color: #2d7255;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition:
+        transform 150ms ease,
+        box-shadow 150ms ease;
+}
+
+.kpi-card mat-card-content {
+    padding: 18px;
+}
+
+/* Card header */
+
+.kpi-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.kpi-title {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    // color: #555950;
+    color:  rgb(252, 238, 83);
+}
+
+/* Icon */
+
+.kpi-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+
+    //background-color: #e7f1e8;
+    background-color:  #80b589;
+    color: #106920;
+
+    mat-icon {
+        width: 22px;
+        height: 22px;
+        font-size: 22px;
+    }
+}
+
+/* KPI value */
+
+.kpi-value {
+    margin-top: 18px;
+    font-size: clamp(28px, 5vw, 36px);
+    font-weight: 600;
+    line-height: 1.1;
+    // color: #106920;
+    color: rgb(252, 238, 83)
+}
+
+/* Description */
+
+.kpi-description {
+    margin: 8px 0 0;
+    font-size: 12px;
+    line-height: 1.4;
+    // color: #73766e;
+    color:  rgb(252, 238, 83);
+}
+
+/* Small mobile screens */
+
+@media (max-width: 360px) {
+    .dashboard {
+        padding: 16px 10px;
+    }
+
+    .kpi-grid {
+        gap: 10px;
+    }
+
+    .kpi-card mat-card-content {
+        padding: 12px;
+    }
+
+    .kpi-title {
+        font-size: 12px;
+    }
+
+    .kpi-icon {
+        width: 32px;
+        height: 32px;
+
+        mat-icon {
+            font-size: 20px;
+        }
+    }
+
+    .kpi-value {
+        font-size: 28px;
+    }
+}
+
+/* Larger screens */
+
+@media (min-width: 768px) {
+    .dashboard {
+        padding: 32px 24px;
+    }
+
+    .kpi-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 20px;
+    }
+
+    .kpi-card mat-card-content {
+        padding: 24px;
+    }
+
+    .kpi-title {
+        font-size: 15px;
+    }
+
+    .kpi-description {
+        font-size: 13px;
+    }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+    .kpi-card {
+        transition: none;
+    }
+}
+
+.date-button {
+    background-color:#2d7255 !important;
+    color: rgb(252, 238, 83) !important;
+}
+
+.date-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    align-items: center;
+
+    .date-button {
+        flex: 1 1 auto;
+        min-width: 0;
+        padding: 8px 16px;
+        border-radius: 10px;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+        background-color: #2d7255 !important;
+        color: rgb(252, 238, 83) !important;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+        transition:
+            transform 150ms ease,
+            box-shadow 150ms ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.16);
+        }
+
+        &:active {
+            background-color: #106920 !important;
+            box-shadow: inset 0 0 0 2px rgb(252, 238, 83);
+            font-weight: 600;
+            // transform: translateY(0);
+        }
+    }
+}
+
+/* Small screens */
+@media (max-width: 360px) {
+    .date-buttons {
+        gap: 8px;
+
+        .date-button {
+            padding: 6px 8px;
+            font-size: 12px;
+        }
+    }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    .date-buttons .date-button {
+        transition: none;
+    }
+}

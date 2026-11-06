@@ -1,0 +1,57 @@
+<mat-sidenav-container class="sidenav-container">
+
+    <!-- Left sidenav -->
+    <mat-sidenav #drawer class="sidenav" mode="over" position="start">
+        <mat-toolbar>Navigation</mat-toolbar>
+
+        <mat-nav-list>
+            <a mat-list-item routerLink="/dashboard" (click)="drawer.close()">
+                <mat-icon matListItemIcon aria-hidden="true">trolley</mat-icon>
+                <span matListItemTitle>KPI Dashboard</span>
+            </a>
+
+            <a mat-list-item routerLink="/dev" (click)="drawer.close()">
+                <mat-icon matListItemIcon aria-hidden="true">settings</mat-icon>
+                <span matListItemTitle>Settings</span>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <!-- Main content -->
+    <mat-sidenav-content>
+
+        <header>
+            <nav aria-label="Main navigation">
+                <mat-toolbar class="navbar">
+
+                    <!-- Left: Hamburger menu -->
+                    <button mat-icon-button aria-label="Open navigation menu" (click)="drawer.toggle()">
+                        <mat-icon aria-hidden="true">menu</mat-icon>
+                    </button>
+
+                    <!-- Center: Logo and title -->
+                    <div class="navbar-brand">
+                        <mat-icon aria-hidden="true">yard</mat-icon>
+                        <span>Order Overview</span>
+                    </div>
+
+                    <!-- Right: Logout -->
+                    <button mat-icon-button class="logout-button" matTooltip="Logout" routerLink="/login"
+                        aria-label="Logout">
+                        <mat-icon aria-hidden="true">logout</mat-icon>
+                    </button>
+
+                </mat-toolbar>
+            </nav>
+        </header>
+
+        <!-- Routed page content -->
+        <main>
+            <router-outlet />
+        </main>
+
+        <footer>
+            <p>Copyright &copy; 2026 </p>
+        </footer>
+    </mat-sidenav-content>
+</mat-sidenav-container>

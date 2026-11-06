@@ -1,0 +1,62 @@
+<main class="dashboard">
+
+    <section class="dashboard-heading">
+        <h1>Transaction KPIs</h1>
+        <hr>
+        <p>...</p>
+        <br>
+        <div class="date-buttons">
+            <button mat-raised-button class="date-button" [class.active]="selectedRange() === 'today'"
+                (click)="getKpisForToday()">
+                Today
+            </button>
+
+            <button mat-raised-button class="date-button" [class.active]="selectedRange() === 'week'"
+                (click)="getKpisForThisWeek()">
+                This Week
+            </button>
+
+            <button mat-raised-button class="date-button" [class.active]="selectedRange() === 'month'"
+                (click)="getKpisForThisMonth()">
+                This Month
+            </button>
+        </div>
+    </section>
+
+    <p>🕐 API response last received: {{ greetingLastReceived() | date:'yyyy-MM-dd HH:mm:ss' }}</p>
+
+    <section class="kpi-grid" aria-label="Order statistics">
+
+        @for (kpi of kpis(); track kpi.title) {
+        <mat-card class="kpi-card">
+
+            <mat-card-content>
+
+                <div class="kpi-header">
+                    <span class="kpi-title">
+                        {{ kpi.title }}
+                    </span>
+
+                    <div class="kpi-icon">
+                        <mat-icon aria-hidden="true">
+                            {{ kpi.icon }}
+                        </mat-icon>
+                    </div>
+                </div>
+
+                <div class="kpi-value">
+                    {{ kpi.value }}
+                </div>
+
+                <p class="kpi-description">
+                    {{ kpi.description }}
+                </p>
+
+            </mat-card-content>
+
+        </mat-card>
+        }
+
+    </section>
+
+</main>
