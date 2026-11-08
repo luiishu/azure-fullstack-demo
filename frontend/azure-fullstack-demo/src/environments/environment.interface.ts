@@ -9,5 +9,13 @@ export interface Environment {
     readonly environmentName: EnvironmentName;
     readonly api: {
         readonly baseUrl: string;
+    },
+
+    readonly msal: {
+        readonly clientId: string;
+        readonly authority: string;
+        readonly knownAuthorities: string[];
+        readonly redirectUri: string;
+        readonly postLogoutRedirectUri: string;
     }
 }

@@ -4,6 +4,7 @@ import { MainLayout } from './shared/components/main-layout/main-layout';
 import { DevPage } from './features/dev/dev-page/dev-page';
 import { WelcomePage } from './features/welcome/welcome-page/welcome-page';
 import { DashboardPage } from './features/dashboard/dashboard-page/dashboard-page';
+import { MsalGuard } from '@azure/msal-angular';
 
 const devRoutes: Routes = environment.isDev
     ? [
@@ -25,7 +26,8 @@ export const routes: Routes = [
             },
             {
                 path: 'dashboard',
-                component: DashboardPage
+                component: DashboardPage,
+                canActivate: [MsalGuard]
             },
             ...devRoutes,
             {

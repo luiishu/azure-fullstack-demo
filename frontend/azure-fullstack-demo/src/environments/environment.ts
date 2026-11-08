@@ -6,5 +6,12 @@ export const environment: Environment = {
     environmentName: 'prod',
     api: {
         baseUrl: 'prod-url',
+    },
+    msal: {
+        clientId: "",
+        authority: "",
+        knownAuthorities: [],
+        redirectUri: "",
+        postLogoutRedirectUri: "",        
     }
 };
