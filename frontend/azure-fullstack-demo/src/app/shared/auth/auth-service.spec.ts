@@ -3,13 +3,13 @@ import { AuthService } from './auth-service';
 import { AccountInfo } from '@azure/msal-browser';
 import { MsalService } from '@azure/msal-angular';
 
-describe('service', () => {
-    let service: AuthService;
+describe('AuthService', () => {
+    let authService: AuthService;
     let activeAccount: AccountInfo | null;
 
     // beforeEach(() => {
     //   TestBed.configureTestingModule({});
-    //   service = TestBed.inject(AuthService);
+    //   authService = TestBed.inject(AuthService);
     // });
 
     //   it('should be created', () => {
@@ -44,32 +44,32 @@ describe('service', () => {
     });
 
     it('should initialize as logged out when no active account exists', () => {
-        service = TestBed.inject(AuthService);
+        authService = TestBed.inject(AuthService);
 
-        expect(service.isLoggedIn()).toBe(false);
-        expect(service.user()).toBeNull();
+        expect(authService.isLoggedIn()).toBe(false);
+        expect(authService.user()).toBeNull();
     });
 
     it('should initialize as logged in when an active account exists', () => {
         activeAccount = mockAccount;
 
-        service = TestBed.inject(AuthService);
+        authService = TestBed.inject(AuthService);
 
-        expect(service.isLoggedIn()).toBe(true);
-        expect(service.user()).toEqual(mockAccount);
+        expect(authService.isLoggedIn()).toBe(true);
+        expect(authService.user()).toEqual(mockAccount);
     });
 
     it('should update authentication state when setAccount is called', () => {
-        service = TestBed.inject(AuthService);
+        authService = TestBed.inject(AuthService);
 
-        service.setAccount(mockAccount);
+        authService.setAccount(mockAccount);
 
-        expect(service.isLoggedIn()).toBe(true);
-        expect(service.user()).toEqual(mockAccount);
+        expect(authService.isLoggedIn()).toBe(true);
+        expect(authService.user()).toEqual(mockAccount);
 
-        service.setAccount(null);
+        authService.setAccount(null);
 
-        expect(service.isLoggedIn()).toBe(false);
-        expect(service.user()).toBeNull();
+        expect(authService.isLoggedIn()).toBe(false);
+        expect(authService.user()).toBeNull();
     });
 });

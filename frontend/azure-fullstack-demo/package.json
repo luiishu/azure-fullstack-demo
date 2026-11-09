@@ -11,7 +11,9 @@
     "build:uat": "ng build --configuration uat",
     "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "test:auth-service": "ng test --include src/app/shared/auth/auth-service.spec.ts",
+    "test:validate-date-range": "ng test --filter=\"validateDateRange\""
   },
   "private": true,
   "packageManager": "npm@12.2.1",

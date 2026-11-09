@@ -1,12 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { KpiResponse, KpiService } from '../kpi-service';
+import { KpiService } from '../kpi-service';
 import { switchMap, timer } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { validateDateRange } from '../date-range-validator';
 import { DatePipe } from '@angular/common';
+import { KpiResponse } from '../kpi-response';
 
 interface Kpi {
   title: string;
@@ -41,13 +42,6 @@ export class DashboardPage {
 
   constructor() {
     this.getKpisForToday();
-  }
-
-  getGreeting(): void {
-    this.kpiService.getGreeting().subscribe(response => {
-      this.greeting.set(response);
-      this.greetingLastReceived.set(new Date());
-    });
   }
 
   getKpis(): void {
