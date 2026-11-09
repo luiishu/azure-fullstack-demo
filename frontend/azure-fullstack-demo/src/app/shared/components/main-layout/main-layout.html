@@ -5,15 +5,25 @@
         <mat-toolbar>Navigation</mat-toolbar>
 
         <mat-nav-list>
+            <a mat-list-item routerLink="/" (click)="drawer.close()">
+                <mat-icon matListItemIcon aria-hidden="true">home</mat-icon>
+                <span matListItemTitle>Home</span>
+            </a>
+
+            @if (authService.isLoggedIn()) {
             <a mat-list-item routerLink="/dashboard" (click)="drawer.close()">
                 <mat-icon matListItemIcon aria-hidden="true">trolley</mat-icon>
                 <span matListItemTitle>KPI Dashboard</span>
             </a>
+            }
 
+            @if (environment.isDev) {
             <a mat-list-item routerLink="/dev" (click)="drawer.close()">
                 <mat-icon matListItemIcon aria-hidden="true">settings</mat-icon>
                 <span matListItemTitle>Settings</span>
             </a>
+            }
+
         </mat-nav-list>
     </mat-sidenav>
 
@@ -36,10 +46,12 @@
                     </div>
 
                     <!-- Right: Logout -->
-                    <button mat-icon-button class="logout-button" matTooltip="Logout" routerLink="/login"
-                        aria-label="Logout" (click)="logout()">
+                    @if (authService.isLoggedIn()) {
+                    <button mat-icon-button class="logout-button" matTooltip="Logout"
+                        aria-label="Logout" (click)="authService.logout()">
                         <mat-icon aria-hidden="true">logout</mat-icon>
                     </button>
+                    }
 
                 </mat-toolbar>
             </nav>

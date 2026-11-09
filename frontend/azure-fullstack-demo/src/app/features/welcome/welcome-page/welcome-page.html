@@ -7,6 +7,18 @@
             </div>
         </mat-card-header>
 
+        @if (authService.isLoggedIn()) {
+        <mat-card-content>
+            <p>Welcome, {{ authService.user()?.name }}!</p>
+            <p>You are signed in and ready to access the dashboard.</p>
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button class="login-button" routerLink="/dashboard">
+                Go to dashboard
+            </button>
+        </mat-card-actions>
+        } @else {
         <mat-card-content>
             <p>Please sign in with your account to access the dashboard.</p>
         </mat-card-content>
@@ -16,5 +28,6 @@
                 Sign in with Microsoft
             </button>
         </mat-card-actions>
+        }
     </mat-card>
 </section>

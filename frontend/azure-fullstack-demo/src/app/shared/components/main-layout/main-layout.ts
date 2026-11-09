@@ -6,7 +6,8 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MsalService } from '@azure/msal-angular';
+import { AuthService } from '../../auth/auth-service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-main-layout',
@@ -24,9 +25,11 @@ import { MsalService } from '@azure/msal-angular';
   styleUrl: './main-layout.scss',
 })
 export class MainLayout {
-  private msalService = inject(MsalService);
+  public authService = inject(AuthService);
+  private environment = environment;
+  // private msalService = inject(MsalService);
 
-  public logout() {
-    this.msalService.logoutRedirect();
-  }
+  // public logout() {
+  //   this.msalService.logoutRedirect();
+  // }
 }

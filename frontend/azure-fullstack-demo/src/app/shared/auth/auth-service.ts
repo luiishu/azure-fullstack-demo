@@ -1,49 +1,22 @@
-
-import { Injectable, inject, signal } from '@angular/core';
-import { MsalBroadcastService, MsalService } from '@azure/msal-angular';
-
-import {
-    AccountInfo,
-    InteractionStatus
-} from '@azure/msal-browser';
-
-import { filter } from 'rxjs';
+import { Injectable, computed, inject, signal } from '@angular/core';
+import { MsalService } from '@azure/msal-angular';
+import { AccountInfo } from '@azure/msal-browser';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
     private msalService = inject(MsalService);
-    private msalBroadcastService = inject(MsalBroadcastService);
 
-    private account = signal<AccountInfo | null>(null);
+    private account = signal<AccountInfo | null>(
+        this.msalService.instance.getActiveAccount()
+    );
 
-    readonly isLoggedIn = () => this.account() !== null;
     readonly user = this.account.asReadonly();
+    readonly isLoggedIn = computed(() => this.account() !== null);
 
-    constructor() {
-        this.msalBroadcastService.inProgress$
-            .pipe(
-                filter(status => status === InteractionStatus.None)
-            )
-            .subscribe(() => {
-                this.updateAccount();
-            });
-    }
-
-    private updateAccount(): void {
-        let activeAccount = this.msalService.instance.getActiveAccount();
-
-        if (!activeAccount) {
-            const accounts = this.msalService.instance.getAllAccounts();
-
-            if (accounts.length > 0) {
-                activeAccount = accounts[0];
-                this.msalService.instance.setActiveAccount(activeAccount);
-            }
-        }
-
-        this.account.set(activeAccount);
+    setAccount(account: AccountInfo | null): void {
+        this.account.set(account);
     }
 
     login(): void {
@@ -53,8 +26,14 @@ export class AuthService {
     }
 
     logout(): void {
-        this.msalService.logoutRedirect({
-            account: this.account() ?? undefined
+        // this.msalService.logoutRedirect({
+        //     account: this.user ?? undefined
+        // }).subscribe({
+        //     error: error => console.error('Logout failed:', error)
+        // });
+       
+        this.msalService.logoutRedirect().subscribe({
+            error: error => console.error('Logout failed:', error)
         });
     }
 }
