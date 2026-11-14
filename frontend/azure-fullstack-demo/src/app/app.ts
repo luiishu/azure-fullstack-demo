@@ -18,6 +18,20 @@ export class App implements OnInit {
   protected readonly title = signal('azure-fullstack-demo');
 
   ngOnInit(): void {
+    window.addEventListener('pageshow', (event) => {
+      if (event.persisted) {
+        const accounts = this.msalService.instance.getAllAccounts();
+
+        if (accounts.length === 0) {
+          this.authService.setAccount(null);
+
+          this.router.navigateByUrl('/', {
+            replaceUrl: true
+          });
+        }
+      }
+    });
+    
     this.msalService.handleRedirectObservable().subscribe({
       next: (result) => {
         if (result?.account) {
