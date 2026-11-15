@@ -2,8 +2,26 @@
 
 using AzureFullstackDemo.Api.Features.Kpis;
 using AzureFullstackDemo.Api.Infrastructure.JsonPlaceholderClient;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+.AddJwtBearer(jwtOptions =>
+{
+    jwtOptions.Authority = builder.Configuration["Entra:Authority"];
+    jwtOptions.Audience = builder.Configuration["Entra:Audience"];
+
+    jwtOptions.MapInboundClaims = false;
+});
+
+// builder.Services.AddAuthorizationBuilder();
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("RequireApiScope", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scp", "access_as_user");
+    });
 
 builder.Services.AddJsonPlaceHolderClient(builder.Configuration);
 
@@ -35,7 +53,7 @@ builder.Services.AddCors(options =>
                 HttpMethods.Get,
                 HttpMethods.Post
             )
-            .WithHeaders("Content-Type", "X-Client");
+            .WithHeaders("Content-Type", "Authorization", "X-Client");
     });
 });
 
@@ -56,12 +74,24 @@ app.UseHttpLogging();
 
 app.UseCors(allowedFrontendsPolicy);
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 var api = app.MapGroup("api/v1");
 api.MapGet("/", () => "Hello from AzureFullstackDemo.Api!");
 api.MapGet("/health", () => "AzureFullstackDemo.Api is up and running! 🚀");
 
-var kpis = api.MapGroup("/kpis");
+var kpis = api.MapGroup("/kpis").RequireAuthorization("RequireApiScope");
 kpis.MapGetKpis();
+
+// api.MapGet("/debug/claims", (HttpContext context) =>
+// {
+//     return context.User.Claims.Select(claim => new
+//     {
+//         claim.Type,
+//         claim.Value
+//     });
+// });
 
 Console.WriteLine($"Running AzureFullstackDemo.Api in: {app.Environment.EnvironmentName}");
 
