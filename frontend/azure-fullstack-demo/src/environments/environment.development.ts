@@ -14,7 +14,8 @@ export const environment: Environment = {
             "mango420testtenant.ciamlogin.com",
             "bd63f017-fcd9-4b6f-915b-9a0a92a41c06.ciamlogin.com"
         ],
+        apiScope: "api://ca216a1f-e7d6-4e28-901f-5d1c7ef004bd/access_as_user",
         redirectUri: "http://localhost:4200/",
-        postLogoutRedirectUri: "http://localhost:4200/",        
+        postLogoutRedirectUri: "http://localhost:4200/",
     }
 };

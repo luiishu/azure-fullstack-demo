@@ -15,6 +15,7 @@ export const environment: Environment = {
             "mango420testtenant.ciamlogin.com",
             "bd63f017-fcd9-4b6f-915b-9a0a92a41c06.ciamlogin.com"
         ],
+        apiScope: "",
         redirectUri: "https://thankful-beach-0d4014010.8.azurestaticapps.net/",
         postLogoutRedirectUri: "https://thankful-beach-0d4014010.8.azurestaticapps.net/",
     }

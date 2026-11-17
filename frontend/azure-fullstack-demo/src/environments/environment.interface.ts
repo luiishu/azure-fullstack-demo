@@ -15,6 +15,7 @@ export interface Environment {
         readonly clientId: string;
         readonly authority: string;
         readonly knownAuthorities: string[];
+        readonly apiScope: string;
         readonly redirectUri: string;
         readonly postLogoutRedirectUri: string;
     }

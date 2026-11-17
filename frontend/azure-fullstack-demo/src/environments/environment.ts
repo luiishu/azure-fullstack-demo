@@ -11,6 +11,7 @@ export const environment: Environment = {
         clientId: "",
         authority: "",
         knownAuthorities: [],
+        apiScope: "",
         redirectUri: "",
         postLogoutRedirectUri: "",        
     }
